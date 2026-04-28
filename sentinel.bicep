@@ -1,19 +1,4 @@
-targetScope = 'subscription'
-
-@description('Name of the resource group')
-param rgName string
-
 @description('Azure region for all resources')
-@allowed([
-  'swedencentral'
-  'westeurope'
-  'northeurope'
-  'germanywestcentral'
-  'norwayeast'
-  'uksouth'
-  'eastus'
-  'eastus2'
-])
 param location string
 
 @description('Name of the Log Analytics workspace')
@@ -24,17 +9,18 @@ param workspaceName string
 @maxValue(730)
 param retentionInDays int = 90
 
-resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: rgName
+resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2021-06-01' = {
+  name: workspaceName
   location: location
-}
-
-module sentinel './sentinel.bicep' = {
-  name: 'deploySentinel'
-  scope: rg
-  params: {
-    location: location
-    workspaceName: workspaceName
+  properties: {
+    sku: {
+      name: 'PerGB2018'
+    }
     retentionInDays: retentionInDays
   }
+}
+
+resource sentinel 'Microsoft.SecurityInsights/onboardingStates@2024-03-01' = {
+  name: 'default'
+  scope: logAnalytics
 }
