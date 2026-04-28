@@ -7,7 +7,7 @@ param workspaceName string
 @description('Number of days to retain data in Log Analytics (30-730)')
 @minValue(30)
 @maxValue(730)
-param retentionInDays int = 90
+param retentionInDays int = 30
 
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2021-06-01' = {
   name: workspaceName
