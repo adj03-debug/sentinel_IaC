@@ -18,12 +18,8 @@ Resource Group
 
 ## Deployment
 
-```bash
-az deployment sub create \
-  --location <region> \
-  --template-file main.bicep \
-  --name <deployment-namn>
-```
+bash
+az deployment sub create --location <region> --template-file main.bicep
 
 Du kommer sedan få fylla i parametrarna interaktivt:
 
@@ -31,26 +27,14 @@ Du kommer sedan få fylla i parametrarna interaktivt:
 Please provide string value for 'rgName': rg-sentinel-prod
 Please provide string value for 'location': swedencentral
 Please provide string value for 'workspaceName': law-sentinel-prod
-Please provide int value for 'retentionInDays' (default: 90):
+Please provide int value for 'retentionInDays' (default: 30):
 ```
 
 ### Exempel
 
-```bash
-az deployment sub create \
-  --location swedencentral \
-  --template-file main.bicep \
-  --name deploySentinel
-```
+bash
+az deployment sub create --location swedencentral --template-file main.bicep
 
-## Parametrar
-
-| Parameter | Beskrivning | Obligatorisk | Default |
-|---|---|---|---|
-| `rgName` | Namn på resource group | Ja | – |
-| `location` | Azure-region | Ja | – |
-| `workspaceName` | Namn på Log Analytics workspace | Ja | – |
-| `retentionInDays` | Datalagringstid i dagar (30–730) | Nej | 90 |
 
 ### Tillåtna regioner
 
